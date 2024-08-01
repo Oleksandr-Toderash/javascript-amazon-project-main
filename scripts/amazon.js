@@ -1,3 +1,7 @@
+import { cart as myCart } from '../data/cart.js';
+
+myCart = []
+
 let productsHTML = '';
 
 products.forEach(product => {
@@ -80,13 +84,28 @@ document.querySelectorAll('.js-add-to-cart').forEach(button => {
       cartQuantity += item.quantity;
     });
 
+
     document.querySelector('.add-quantity-js').innerHTML = cartQuantity;
 
     // Quantity Selector
 
-    const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`).value;
+    const quantitySelector = document.querySelector(
+      `.js-quantity-selector-${productId}`
+    );
+    const quantity = quantitySelector.value;
+    quantity = Number(quantity.value);
 
-    Number(quantitySelector);
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+      matchingItem.quantity += quantity;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: 1,
+        quantity: quantity
+      });
+    }
 
   })
+
 })
